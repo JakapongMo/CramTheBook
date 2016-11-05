@@ -10,7 +10,6 @@ import com.badlogic.gdx.math.Vector2;
 public class GameScreen extends ScreenAdapter{
 
     private CramTheBookGame cramTheBookGame;
-    private Texture playerImg;
     private Player player;
     private Obstacle obstacle;
     
@@ -21,7 +20,6 @@ public class GameScreen extends ScreenAdapter{
     
     public GameScreen(CramTheBookGame cramTheBookGame) {
         this.cramTheBookGame = cramTheBookGame;
-        playerImg =  new Texture("boy.png");
         world = new World(cramTheBookGame);
         player = world.getPlayer();   
         obstacle = world.getObstacle();
@@ -37,21 +35,32 @@ public class GameScreen extends ScreenAdapter{
     }
 
     private void update(float delta){
+    	updatePlayerDirection(); 	
+       	updateObstacleDirection();
+       	world.update(delta);
+    	
+    }
+    private void updatePlayerDirection() {
     	if (Gdx.input.isKeyPressed(Keys.UP)) {
-       		player.move(player.DIRECTION_UP);
+    		player.setNextDirection(player.DIRECTION_UP);
        	}
     	if (Gdx.input.isKeyPressed(Keys.RIGHT)){
-    		player.move(player.DIRECTION_RIGHT);
+    		player.setNextDirection(player.DIRECTION_RIGHT);
     		//obstacle.move(obstacle.DIRECTION_RIGHT);
        	}
     	if (Gdx.input.isKeyPressed(Keys.LEFT)) {
-    		player.move(player.DIRECTION_LEFT);
+    		player.setNextDirection(player.DIRECTION_LEFT);
        	}
        	if (Gdx.input.isKeyPressed(Keys.DOWN)) {
-       		player.move(player.DIRECTION_DOWN);
+       		player.setNextDirection(player.DIRECTION_DOWN);
        	}
-       	
-       	int  ran = MathUtils.random(0,100);
+       	if(this.isStill()){
+			player.setNextDirection(player.DIRECTION_STILL);
+		}
+    }
+    
+    private void updateObstacleDirection(){
+    	int  ran = MathUtils.random(0,100);
        	if (ran<25) {
        		obstacle.move(obstacle.DIRECTION_UP);
        	} else if (ran<50) {
@@ -62,4 +71,9 @@ public class GameScreen extends ScreenAdapter{
        		obstacle.move(obstacle.DIRECTION_DOWN);
        	}
     }
+    
+    public boolean isStill(){
+		return (!(Gdx.input.isKeyPressed(Keys.UP)) && !(Gdx.input.isKeyPressed(Keys.RIGHT)) && 
+				!(Gdx.input.isKeyPressed(Keys.DOWN))&&!(Gdx.input.isKeyPressed(Keys.LEFT)) );
+	}
 }

@@ -22,8 +22,11 @@ public class MapRenderer {
 	                int x = c * 40;
 	                int y = CramTheBookGame.HEIGHT - (r * 40) - 40;
 	 
-	                if(mapWorld.hasWallAt(r, c)) {
+	                if (mapWorld.hasWallAt(r, c)) {
 	                    batch.draw(wallImage, x, y);
+	                }
+	                if (mapWorld.hasDAt(r, c)) {
+	                	batch.draw(wallImage, x, y);
 	                }
 	            }
 	        }

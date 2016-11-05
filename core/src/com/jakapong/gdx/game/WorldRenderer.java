@@ -17,6 +17,9 @@ public class WorldRenderer extends ScreenAdapter{
 	//Texture bgImg;
 	Player player;
 	Obstacle obstacle;
+	public static final int BLOCK_SIZE = 40;
+	public static final int PLAYER_SIZE = 80;
+	
 	private MapRenderer mapRenderer;
 	
 	public WorldRenderer(CramTheBookGame cramTheBookGame, World world){

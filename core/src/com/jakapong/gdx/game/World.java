@@ -9,7 +9,7 @@ public class World {
 	World(CramTheBookGame cramTheBookGame){
 		this.cramTheBookGame =cramTheBookGame;
 		
-		player = new Player(100,100);
+		player = new Player(60,60, this);
 		obstacle = new Obstacle(200,200);
 		mapWorld = new MapWorld();
 	}
@@ -22,4 +22,8 @@ public class World {
     MapWorld getMapWorld() {
         return mapWorld;
     }
+    
+	public void update(float delta) {
+		player.update();
+	}
 }

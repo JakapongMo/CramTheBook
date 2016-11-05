@@ -33,4 +33,12 @@ public class Obstacle {
 	public Vector2 getPosition(){
 		return position;
 	}
+	
+	private int getRow() {
+        return ((int)position.y) / 40; 
+    }
+ 
+    private int getColumn() {
+        return ((int)position.x) / 40; 
+    }
 }
