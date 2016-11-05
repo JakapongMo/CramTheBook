@@ -7,8 +7,8 @@ import com.jakapong.gdx.game.CramTheBookGame;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.width=1410;
-		config.height=430;
+		config.width=CramTheBookGame.WIDTH;
+		config.height=CramTheBookGame.HEIGHT;
 		config.foregroundFPS = 60;
 		new LwjglApplication(new CramTheBookGame(), config);
 	}
