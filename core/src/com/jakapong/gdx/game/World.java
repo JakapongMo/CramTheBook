@@ -5,6 +5,7 @@ public class World {
 	private Player player;
 	private Obstacle obstacle;
 	private MapWorld mapWorld;
+	private int score = 0;
 	
 	World(CramTheBookGame cramTheBookGame){
 		this.cramTheBookGame =cramTheBookGame;
@@ -13,12 +14,21 @@ public class World {
 		obstacle = new Obstacle(200,200, this);
 		mapWorld = new MapWorld();
 	}
+	public int getScore(){
+		return score;
+	}
+	
+	public void increaseScore(){
+		score +=1;
+	}
+	
 	Player getPlayer(){
 		return player;
 	}
 	Obstacle getObstacle(){
 		return obstacle;
 	}
+
     MapWorld getMapWorld() {
         return mapWorld;
     }
