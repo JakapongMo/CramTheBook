@@ -12,7 +12,7 @@ public class MapRenderer {
 	     this.mapWorld = mapWorld;
 	     this.batch = batch;
 	     
-	     wallImage = new Texture("dot.png");
+	     wallImage = new Texture("grayblock.jpg");
 	 }
 	 
 	 public void render() {
