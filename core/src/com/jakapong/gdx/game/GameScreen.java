@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 public class GameScreen extends ScreenAdapter{
 
     private CramTheBookGame cramTheBookGame;
@@ -60,18 +62,36 @@ public class GameScreen extends ScreenAdapter{
     }
     
     private void updateObstacleDirection(){
-    	int  ran = MathUtils.random(0,100);
-       	if (ran<25) {
-       		obstacle.move(obstacle.DIRECTION_UP);
+    	/*int  ran = MathUtils.random(0,100)
+       	if (ran <25) {
+       		obstacle.setNextDirection(obstacle.DIRECTION_UP);
+       		//ran1();
        	} else if (ran<50) {
-       		obstacle.move(obstacle.DIRECTION_RIGHT);
+       		obstacle.setNextDirection(obstacle.DIRECTION_RIGHT);
+       		//ran1();
        	} else if (ran<75) {
-       		obstacle.move(obstacle.DIRECTION_LEFT);
+       		obstacle.setNextDirection(obstacle.DIRECTION_LEFT);
+       		//ran1();
        	} else if (ran<101) {
-       		obstacle.move(obstacle.DIRECTION_DOWN);
-       	}
+       		obstacle.setNextDirection(obstacle.DIRECTION_DOWN);
+       		//ran1();
+       	}*/
+    	float delay = 1; // seconds
+    	Timer.schedule(new Task(){
+    	    @Override
+    	    public void run() {
+    	        // Do your work
+    	    }
+    	}, delay);
+    		obstacle.setNextDirection(obstacle.CHECK_EDGE%4+1);
     }
-    
+    private void delay5(){
+    	Timer.schedule(new Task() {
+    		//@Override
+        	public void run() {
+        	}
+        }, 5);
+    }
     public boolean isStill(){
 		return (!(Gdx.input.isKeyPressed(Keys.UP)) && !(Gdx.input.isKeyPressed(Keys.RIGHT)) && 
 				!(Gdx.input.isKeyPressed(Keys.DOWN))&&!(Gdx.input.isKeyPressed(Keys.LEFT)) );
