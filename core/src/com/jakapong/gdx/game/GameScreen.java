@@ -14,6 +14,9 @@ public class GameScreen extends ScreenAdapter{
     private CramTheBookGame cramTheBookGame;
     private Player player;
     private Obstacle obstacle;
+    private Enemy enemy1;
+    private Enemy enemy2;
+    private Enemy enemy3;
     public static int checkmove = 0;
     public static int move = 0;
     public static boolean checkroundmove = false;
@@ -31,6 +34,9 @@ public class GameScreen extends ScreenAdapter{
         world = new World(cramTheBookGame);
         player = world.getPlayer();   
         obstacle = world.getObstacle();
+        enemy1 = world.getEnemy1();
+        enemy2 = world.getEnemy2();
+        enemy3 = world.getEnemy3();
         worldRenderer = new WorldRenderer(cramTheBookGame, world);
     }
     
@@ -46,6 +52,10 @@ public class GameScreen extends ScreenAdapter{
     	updatePlayerDirection(); 	
        	updateObstacleDirection();
        	updateScore();
+       	updateEnermy1Direction();
+       	updateEnermy2Direction();
+       	updateEnermy3Direction();
+       	updateLifePoint();
        	world.update(delta);
        	checkmove++;
        	checksec++;
@@ -57,7 +67,7 @@ public class GameScreen extends ScreenAdapter{
        	if(move == 61) {
        		move =0;
        	}
-       	if(checksec == 50) {
+       	if(checksec == 60) {
        		sec++;
        		checksec = 0;
        		checkroundsec = true;
@@ -94,6 +104,36 @@ public class GameScreen extends ScreenAdapter{
     		if(sec%1 == 0 && checkroundsec == true){
     				world.increaseScore();
     	    		checkroundsec = false;
+    	    	}	
+    	}
+    }
+    
+    private void updateLifePoint(){
+    	Vector2 posPlayer = player.getPosition();
+    	Vector2 posEnemy1 = enemy1.getPosition();
+    	Vector2 posEnemy2 = enemy2.getPosition();
+    	Vector2 posEnemy3 = enemy3.getPosition();
+    	
+    	if ((posPlayer.x > posEnemy1.x-100 && posPlayer.x < posEnemy1.x+100) && (posPlayer.y > posEnemy1.y-100 && posPlayer.y < posEnemy1.y+100)) {
+    		if(sec%2 == 0 && checkroundsec == true){
+    				world.decreaseScore();
+    	    		checkroundsec = false;
+    	
+    	    	}	
+    	}
+    	
+    	if ((posPlayer.x > posEnemy2.x-100 && posPlayer.x < posEnemy2.x+100) && (posPlayer.y > posEnemy2.y-100 && posPlayer.y < posEnemy2.y+100)) {
+    		if(sec%2 == 0 && checkroundsec == true){
+    				world.decreaseScore();
+    	    		checkroundsec = false;
+    	
+    	    	}	
+    	}
+    	
+    	if ((posPlayer.x > posEnemy3.x-100 && posPlayer.x < posEnemy3.x+100) && (posPlayer.y > posEnemy3.y-100 && posPlayer.y < posEnemy3.y+100)) {
+    		if(sec%2 == 0 && checkroundsec == true){
+    				world.decreaseScore();
+    	    		checkroundsec = false;
     	
     	    	}	
     	}
@@ -107,6 +147,54 @@ public class GameScreen extends ScreenAdapter{
     	}
     }
     
+    private void updateEnermy1Direction() {
+    		enemy1.move(enemy1.DIRECTION_LEFT);
+    		Vector2 posEnemy1 = enemy1.getPosition();
+    		if(posEnemy1.x < -100) {
+    			enemy1.setPosition(MathUtils.random(1300, 1400),MathUtils.random(60, 800));
+    		}
+    		if(world.getScore()>10) {
+    			enemy1.SPEED = 10;
+    		}
+    		
+    		if(world.getScore()>20) {
+    			enemy1.SPEED = 15;
+    		}
+    		
+    }
+    
+    private void updateEnermy2Direction() {
+		enemy2.move(enemy2.DIRECTION_RIGHT);
+		Vector2 posEnemy2 = enemy2.getPosition();
+		if(posEnemy2.x > 1500) {
+			enemy2.setPosition(-600,MathUtils.random(60, 800));
+		}
+		if(world.getScore()>10) {
+			enemy2.SPEED = 10;
+		}
+		
+		if(world.getScore()>20) {
+			enemy2.SPEED = 15;
+		}
+		
+		
+    }
+    
+    private void updateEnermy3Direction() {
+		enemy3.move(enemy3.DIRECTION_LEFT);
+		Vector2 posEnemy3 = enemy3.getPosition();
+		if(posEnemy3.x < -100) {
+			enemy3.setPosition(MathUtils.random(1300, 1400),MathUtils.random(60, 800));
+		}
+		if(world.getScore()>10) {
+			enemy3.SPEED = 10;
+		}
+		
+		if(world.getScore()>20) {
+			enemy3.SPEED = 15;
+		}
+		
+	}
     public boolean isStill(){
 		return (!(Gdx.input.isKeyPressed(Keys.UP)) && !(Gdx.input.isKeyPressed(Keys.RIGHT)) && 
 				!(Gdx.input.isKeyPressed(Keys.DOWN))&&!(Gdx.input.isKeyPressed(Keys.LEFT)) );
