@@ -7,12 +7,22 @@ public class MapRenderer {
 	 private MapWorld mapWorld;
 	 private SpriteBatch batch;
 	 private Texture wallImage;
+	 private Texture t1Image;
+	 private Texture t2Image;
+	 private Texture t3Image;
+	 private Texture t4Image;
+	 private Texture blockImage;
 	
 	 public MapRenderer(SpriteBatch batch, MapWorld mapWorld) {
 	     this.mapWorld = mapWorld;
 	     this.batch = batch;
 	     
 	     wallImage = new Texture("grayblock.jpg");
+	     t1Image = new Texture("image-1.jpg");
+	     t2Image = new Texture("image-2.jpg");
+	     t3Image = new Texture("image-3.jpg");
+	     t4Image = new Texture("image-4.jpg");
+	     blockImage = new Texture("block.jpg");
 	 }
 	 
 	 public void render() {
@@ -27,6 +37,22 @@ public class MapRenderer {
 	                }
 	                if (mapWorld.hasDAt(r, c)) {
 	                	batch.draw(wallImage, x, y);
+	                }
+	                if( mapWorld.hasT1At(r, c)) {
+	                	batch.draw(t1Image, x, y);
+	                }
+	                if( mapWorld.hasT2At(r, c)) {
+	                	batch.draw(t2Image, x, y);
+	                }
+	                if( mapWorld.hasT3At(r, c)) {
+	                	batch.draw(t3Image, x, y);
+	                }
+	                if( mapWorld.hasT4At(r, c)) {
+	                	batch.draw(t4Image, x, y);
+	                }
+	                
+	                if( mapWorld.hasBlockAt(r, c)) {
+	                	batch.draw(blockImage, x, y);
 	                }
 	            }
 	        }

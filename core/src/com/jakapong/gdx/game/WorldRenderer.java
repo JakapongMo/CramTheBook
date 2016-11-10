@@ -36,7 +36,7 @@ public class WorldRenderer extends ScreenAdapter{
 		batch = cramTheBookGame.batch;
 		this.world = world;
 		playerImg = new Texture("boy.png");
-		obstacleImg = new Texture("mathbook.png");
+		obstacleImg = new Texture("book.png");
 		//bgImg = new Texture("backgroud-2.jpg");
 		font = new BitmapFont();
 		time = new BitmapFont();
@@ -68,12 +68,16 @@ public class WorldRenderer extends ScreenAdapter{
 		//batch.draw(bgImg,0,0);
 		batch.draw(obstacleImg,posObstacle.x,posObstacle.y);
 		batch.draw(playerImg,posPlayer.x,posPlayer.y);
-		if (sec%1 == 0 && checkroundsec == true) {
-			font.draw(batch, "TIME: " + min + " : " +sec, 1000, 870);
-		}
+		drawTime();
 		
 		font.draw(batch, "SCORE: " + world.getScore(), 1000, 850);
 		batch.end();
+		
+	}
+	private void drawTime(){
+		if (sec%1 == 0 && checkroundsec == true) {
+			font.draw(batch, "TIME: " + min + " : " +sec, 1000, 870);
+		}
 		
 	}
 }
