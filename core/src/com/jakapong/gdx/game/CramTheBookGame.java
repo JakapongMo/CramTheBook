@@ -13,6 +13,7 @@ public class CramTheBookGame extends Game {
 	public void create () {
 		batch = new SpriteBatch();
 		setScreen(new GameScreen(this));
+			
 	}
 
 	@Override

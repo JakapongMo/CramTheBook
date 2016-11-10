@@ -70,7 +70,7 @@ public class WorldRenderer extends ScreenAdapter{
 		batch.draw(playerImg,posPlayer.x,posPlayer.y);
 		drawTime();
 		
-		font.draw(batch, "SCORE: " + world.getScore(), 1000, 850);
+		font.draw(batch, "KNOWLEDGE: " + world.getScore(), 1000, 850);
 		batch.end();
 		
 	}

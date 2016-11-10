@@ -10,7 +10,7 @@ public class World {
 	World(CramTheBookGame cramTheBookGame){
 		this.cramTheBookGame =cramTheBookGame;
 		
-		player = new Player(60,60, this);
+		player = new Player(70,70, this);
 		obstacle = new Obstacle(200,200, this);
 		mapWorld = new MapWorld();
 	}

@@ -61,6 +61,7 @@ public class Player {
 		if(mapWorld.hasWallAt(newRow, newCol)){
 			return false;
 		}
+		
 		return true;
 	}
 }

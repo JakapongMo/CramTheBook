@@ -57,7 +57,7 @@ public class GameScreen extends ScreenAdapter{
        	if(move == 61) {
        		move =0;
        	}
-       	if(checksec == 80) {
+       	if(checksec == 50) {
        		sec++;
        		checksec = 0;
        		checkroundsec = true;
@@ -90,10 +90,11 @@ public class GameScreen extends ScreenAdapter{
     	Vector2 posPlayer = player.getPosition();
     	Vector2 posObstacle = obstacle.getPosition();
     	
-    	if (Gdx.input.isKeyPressed(Keys.SPACE) && ((posPlayer.x > posObstacle.x+10 || posPlayer.x < posObstacle.x-10) && (posPlayer.y > posObstacle.y+10 || posPlayer.y < posObstacle.y-10))) {
+    	if (Gdx.input.isKeyPressed(Keys.SPACE) && ((posPlayer.x > posObstacle.x-100 && posPlayer.x < posObstacle.x+100) && (posPlayer.y > posObstacle.y-100 && posPlayer.y < posObstacle.y+100))) {
     		if(sec%1 == 0 && checkroundsec == true){
     				world.increaseScore();
     	    		checkroundsec = false;
+    	
     	    	}	
     	}
     }
