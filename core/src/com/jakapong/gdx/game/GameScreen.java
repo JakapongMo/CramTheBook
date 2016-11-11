@@ -114,23 +114,29 @@ public class GameScreen extends ScreenAdapter{
     	Vector2 posEnemy2 = enemy2.getPosition();
     	Vector2 posEnemy3 = enemy3.getPosition();
     	
-    	if ((posPlayer.x > posEnemy1.x-100 && posPlayer.x < posEnemy1.x+100) && (posPlayer.y > posEnemy1.y-100 && posPlayer.y < posEnemy1.y+100)) {
-    		if(sec%2 == 0 && checkroundsec == true){
-    				world.decreaseScore();
-    	    		checkroundsec = false;
-    	
-    	    	}	
-    	}
-    	
-    	if ((posPlayer.x > posEnemy2.x-100 && posPlayer.x < posEnemy2.x+100) && (posPlayer.y > posEnemy2.y-100 && posPlayer.y < posEnemy2.y+100)) {
-    		if(sec%2 == 0 && checkroundsec == true){
-    				world.decreaseScore();
-    	    		checkroundsec = false;
-    	
-    	    	}	
-    	}
-    	
-    	if ((posPlayer.x > posEnemy3.x-100 && posPlayer.x < posEnemy3.x+100) && (posPlayer.y > posEnemy3.y-100 && posPlayer.y < posEnemy3.y+100)) {
+    	is_Touching(posPlayer.x, posPlayer.y,posEnemy1.x, posEnemy1.y);
+    	is_Touching(posPlayer.x, posPlayer.y,posEnemy2.x, posEnemy2.y);
+    	is_Touching(posPlayer.x, posPlayer.y,posEnemy3.x, posEnemy3.y);
+  
+//    	if ((posPlayer.x > posEnemy2.x-100 && posPlayer.x < posEnemy2.x+100) && (posPlayer.y > posEnemy2.y-100 && posPlayer.y < posEnemy2.y+100)) {
+//    		if(sec%2 == 0 && checkroundsec == true){
+//    				world.decreaseScore();
+//    	    		checkroundsec = false;
+//    	
+//    	    	}	
+//    	}
+//    	
+//    	if ((posPlayer.x > posEnemy3.x-100 && posPlayer.x < posEnemy3.x+100) && (posPlayer.y > posEnemy3.y-100 && posPlayer.y < posEnemy3.y+100)) {
+//    		if(sec%2 == 0 && checkroundsec == true){
+//    				world.decreaseScore();
+//    	    		checkroundsec = false;
+//    	
+//    	    	}	
+//    	}
+    }
+    
+    public  void is_Touching(float posPlayer_x, float posPlayer_y, float posEnemy_x, float posEnemy_y) {
+    	if ((posPlayer_x > posEnemy_x-100 && posPlayer_x < posEnemy_x+100) && (posPlayer_y > posEnemy_y-100 && posPlayer_y < posEnemy_y+100)) {
     		if(sec%2 == 0 && checkroundsec == true){
     				world.decreaseScore();
     	    		checkroundsec = false;
@@ -148,18 +154,12 @@ public class GameScreen extends ScreenAdapter{
     }
     
     private void updateEnermy1Direction() {
-    		enemy1.move(enemy1.DIRECTION_LEFT);
-    		Vector2 posEnemy1 = enemy1.getPosition();
-    		if(posEnemy1.x < -100) {
-    			enemy1.setPosition(MathUtils.random(1300, 1400),MathUtils.random(60, 800));
-    		}
-    		if(world.getScore()>10) {
-    			enemy1.SPEED = 10;
-    		}
-    		
-    		if(world.getScore()>20) {
-    			enemy1.SPEED = 15;
-    		}
+    	enemy1.move(enemy1.DIRECTION_LEFT);
+    	Vector2 posEnemy1 = enemy1.getPosition();
+    	if(posEnemy1.x < -100) {
+    		enemy1.setPosition(MathUtils.random(MathUtils.random(1400, 1500)),MathUtils.random(60, 800));
+    	}
+    	increaseSpeedEnemy(enemy1);
     		
     }
     
@@ -169,14 +169,7 @@ public class GameScreen extends ScreenAdapter{
 		if(posEnemy2.x > 1500) {
 			enemy2.setPosition(-600,MathUtils.random(60, 800));
 		}
-		if(world.getScore()>10) {
-			enemy2.SPEED = 10;
-		}
-		
-		if(world.getScore()>20) {
-			enemy2.SPEED = 15;
-		}
-		
+		increaseSpeedEnemy(enemy2);
 		
     }
     
@@ -184,17 +177,31 @@ public class GameScreen extends ScreenAdapter{
 		enemy3.move(enemy3.DIRECTION_LEFT);
 		Vector2 posEnemy3 = enemy3.getPosition();
 		if(posEnemy3.x < -100) {
-			enemy3.setPosition(MathUtils.random(1300, 1400),MathUtils.random(60, 800));
+			enemy3.setPosition(MathUtils.random(1400, 1500),MathUtils.random(60, 800));
 		}
-		if(world.getScore()>10) {
-			enemy3.SPEED = 10;
-		}
-		
-		if(world.getScore()>20) {
-			enemy3.SPEED = 15;
-		}
+		increaseSpeedEnemy(enemy3);
 		
 	}
+    
+    public void increaseSpeedEnemy(Enemy enemy) {
+    	if(world.getScore() > 10 && world.getScore() < 20) {
+			enemy.SPEED = 10;
+		}
+		
+    	else if(world.getScore() > 20 && world.getScore() < 30) {
+			enemy.SPEED = 15;
+		}
+		
+    	else if(world.getScore() > 30 && world.getScore() < 40) {
+			enemy.SPEED = 17;
+		}
+    	
+    	else if(world.getScore() > 40) {
+			enemy.SPEED = 20;
+		}
+		
+		
+    }
     public boolean isStill(){
 		return (!(Gdx.input.isKeyPressed(Keys.UP)) && !(Gdx.input.isKeyPressed(Keys.RIGHT)) && 
 				!(Gdx.input.isKeyPressed(Keys.DOWN))&&!(Gdx.input.isKeyPressed(Keys.LEFT)) );

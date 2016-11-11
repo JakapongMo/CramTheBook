@@ -18,7 +18,7 @@ public class Enemy {
 		{0,-1},
 		{-1,0}
 	};
-	
+	  
 	private Vector2 position;
 	
 	public Enemy(int x, int y, World world){
