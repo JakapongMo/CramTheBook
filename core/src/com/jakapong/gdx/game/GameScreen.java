@@ -23,6 +23,7 @@ public class GameScreen extends ScreenAdapter{
     public static int checksec = 0;
     public static int sec = 0;
     public static boolean checkroundsec = false;
+    public static boolean checkDead = false;
     
     private int x;
     private int y;
@@ -113,6 +114,7 @@ public class GameScreen extends ScreenAdapter{
     	Vector2 posEnemy1 = enemy1.getPosition();
     	Vector2 posEnemy2 = enemy2.getPosition();
     	Vector2 posEnemy3 = enemy3.getPosition();
+    	update_Dead();
     	
     	is_Touching(posPlayer.x, posPlayer.y,posEnemy1.x, posEnemy1.y);
     	is_Touching(posPlayer.x, posPlayer.y,posEnemy2.x, posEnemy2.y);
@@ -182,6 +184,12 @@ public class GameScreen extends ScreenAdapter{
 		increaseSpeedEnemy(enemy3);
 		
 	}
+    
+    public void update_Dead(){
+    	if(world.getLifePoint() <= 0) {
+    		checkDead = true;
+     	}
+    }
     
     public void increaseSpeedEnemy(Enemy enemy) {
     	if(world.getScore() > 10 && world.getScore() < 20) {

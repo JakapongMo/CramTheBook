@@ -21,7 +21,7 @@ public class Player {
 		{-1,0}
 	};
 	
-	private Vector2 position;
+	Vector2 position;
 	
 	public Player(int x, int y, World world){
 		position = new Vector2(x,y);
@@ -46,14 +46,31 @@ public class Player {
 	}
 	
 	public void update(){
-		if (canMoveInDirection(nextDirection)) {
-			currentDirection = nextDirection;
-		}else{
-			currentDirection=DIRECTION_STILL;
+		if(GameScreen.checkDead) {
+			check_Dead(GameScreen.checkDead);
 		}
-		position.x +=SPEED*DIR_OFFSETS[currentDirection][0];
-		position.y +=SPEED*DIR_OFFSETS[currentDirection][1];
+		
+		else {
+			
+			if (canMoveInDirection(nextDirection)) {
+				currentDirection = nextDirection;
+			}else{
+				currentDirection=DIRECTION_STILL;
+			}
+			position.x +=SPEED*DIR_OFFSETS[currentDirection][0];
+			position.y +=SPEED*DIR_OFFSETS[currentDirection][1];
+			
+			
+		}
 	}
+	
+	public void check_Dead(boolean checkDead){
+		if(checkDead) {
+			position.x +=SPEED*DIR_OFFSETS[DIRECTION_DOWN][0];
+			position.y +=SPEED*DIR_OFFSETS[DIRECTION_DOWN][1];
+		}
+	}
+	
 	private boolean canMoveInDirection(int dir){
 		MapWorld mapWorld = world.getMapWorld();
 		int newRow = (int)getRow()+ DIR_OFFSETS[nextDirection][1];

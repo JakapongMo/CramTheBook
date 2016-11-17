@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Timer;
+import com.badlogic.gdx.utils.Timer.Task;
 
 public class WorldRenderer extends ScreenAdapter{
 
@@ -19,6 +21,7 @@ public class WorldRenderer extends ScreenAdapter{
 	Texture enemy2Img;
 	Texture enemy3Img;
 	Texture obstacleImg;
+	Texture GAMEOVERImg;
 	//Texture bgImg;
 	Player player;
 	Obstacle obstacle;
@@ -46,6 +49,7 @@ public class WorldRenderer extends ScreenAdapter{
 		enemy1Img = new Texture("LINE.png");
 		enemy2Img = new Texture("LINE.png");
 		enemy3Img = new Texture("twitter.png");
+		GAMEOVERImg = new Texture("gameover.jpg");
 		//bgImg = new Texture("backgroud-2.jpg");
 		font = new BitmapFont();
 		time = new BitmapFont();
@@ -90,12 +94,15 @@ public class WorldRenderer extends ScreenAdapter{
 		
 		font.draw(batch, "KNOWLEDGE: " + world.getScore(), 1000, 850);
 		font.draw(batch, "LIFEPOINT: " + world.getLifePoint(), 88, 850);
+		if (GameScreen.checkDead) {
+			batch.draw(GAMEOVERImg,0,0);
+		}
 		batch.end();
-		
 	}
 	private void drawTime(){
 		if (sec%1 == 0 && checkroundsec == true) {
 			font.draw(batch, "TIME: " + min + " : " +sec, 1000, 870);
+			checkroundsec = false;
 		}
 		
 	}
